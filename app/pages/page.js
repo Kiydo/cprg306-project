@@ -1,6 +1,6 @@
 "use client";
 import SearchBox from './components/search-box';
-import Login from './screens/login';
+// import Login from './screens/login';
 import Images from './components/images';
 // import PlaceHolder from './components/placeholder';
 import FetchPhotos from './components/fetch-data';
