@@ -6,6 +6,9 @@ import Images from './components/images';
 import FetchPhotos from './components/fetch-data';
 import NavBar from '../navBar';
 
+// Test
+import { useUserAuth } from './_utils/auth-context';
+
 import { createContext } from 'react';
 import { useState } from 'react';
 
@@ -16,6 +19,17 @@ export default function Page() {
     // const { response, loading, error, fetchData } = FetchPhotos(`https://api.unsplash.com/search/collections?page=1&query=schools`);
     const [search, setSearch] = useState('');
     const { response, loading, error, fetchData } = FetchPhotos(search);
+    const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
+
+    const handleSignIn = async () => {
+        await gitHubSignIn();
+        console.log(user)
+        console.log('user')
+    };
+
+    const handleSignOut = async () => {
+        await firebaseSignOut();
+    };
 
     const handleSearch = (searchQuery) => {
         const query = searchQuery.replace(/\s/g, '+');
@@ -38,6 +52,16 @@ export default function Page() {
 
     return (
         <main>
+            {!user && (
+                <button onClick={handleSignIn}>Sign In</button>
+            )
+            }
+            {user && (
+                <div>
+                    <p>Welcome, {user.displayName} ({user.email})</p>
+                    <button onClick={handleSignOut}>Sign Out</button>
+                </div>
+            )}
             <ImageContext.Provider value={value}>
                 <NavBar />
                 {/* <SavedPhotos /> */}
