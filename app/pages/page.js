@@ -4,6 +4,8 @@ import Login from './screens/login';
 import Images from './components/images';
 // import PlaceHolder from './components/placeholder';
 import FetchPhotos from './components/fetch-data';
+import NavBar from '../navBar';
+
 import { createContext } from 'react';
 import { useState } from 'react';
 
@@ -37,6 +39,8 @@ export default function Page() {
     return (
         <main>
             <ImageContext.Provider value={value}>
+                <NavBar />
+                {/* <SavedPhotos /> */}
                 {/* <Login /> */}
                 <SearchBox onSearch={handleSearch}/>
                 <Images />
