@@ -1,6 +1,6 @@
 "use client";
 
-import { Main } from "next/document";
+// import { Main } from "next/document";
 import { useState } from "react";
 
 export default function SearchBox({ onSearch }) {
