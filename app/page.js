@@ -1,7 +1,7 @@
 "use client";
 
-import { Main } from 'next/document'
-import Image from 'next/image'
+// import { Main } from 'next/document'
+// import Image from 'next/image'
 // import SearchBox from './components/search-box'
 import MainPage from './pages/page';
 

@@ -1,46 +1,46 @@
-// "use client"; 
+"use client"; 
 
-// import { useUserAuth } from "../_utils/auth-context";
-// import MainPage from "../page";
+import { useUserAuth } from "../_utils/auth-context";
+import MainPage from "../page";
 
-// export default function Page() {
-//   const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
+export default function Page() {
+  const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
   
-//   const handleSignIn = async () => {
-//     await gitHubSignIn();
-//     // console.log(user)
-//   }
-//   const handleSignOut = async () => {
-//     await firebaseSignOut();
-//   }
+  const handleSignIn = async () => {
+    await gitHubSignIn();
+    // console.log(user)
+  }
+  const handleSignOut = async () => {
+    await firebaseSignOut();
+  }
 
 
-//   return (
-//     <main className="min-h-screen">
+  return (
+    <main className="min-h-screen">
       
-//       {!user && (
-//         <button onClick={handleSignIn}>Sign In</button>
-//       )
-//       }
-//       {user && (
-//         <div>
-//           <p>Welcome, {user.displayName} ({user.email})</p>
-//           <button onClick={handleSignOut}>Sign Out</button>
-//           <MainPage />
-//         </div>
-//       )}
-//     </main>
-//   )
+      {!user && (
+        <button onClick={handleSignIn}>Sign In</button>
+      )
+      }
+      {user && (
+        <div>
+          <p>Welcome, {user.displayName} ({user.email})</p>
+          <button onClick={handleSignOut}>Sign Out</button>
+          <MainPage />
+        </div>
+      )}
+    </main>
+  )
 
-// }
-// // // import { useUserAuth } from "../_utils/auth-context";
+}
+// // import { useUserAuth } from "../_utils/auth-context";
  
-// // // const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
+// // const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
  
-// // // await gitHubSignIn();
+// // await gitHubSignIn();
  
-// // // await firebaseSignOut();
+// // await firebaseSignOut();
  
-// // // <p>
-// // //   Welcome, {user.displayName} ({user.email})
-// // // </p>;
+// // <p>
+// //   Welcome, {user.displayName} ({user.email})
+// // </p>;
