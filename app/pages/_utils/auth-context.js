@@ -38,7 +38,9 @@ export const AuthContextProvider = ({ children }) => {
 };
  
 export const useUserAuth = () => {
-  return useContext(AuthContext);
+  const context = useContext(AuthContext);
+  console.log('context: ',context);
+  return context;
 };
 
 // export default useUserAuth;

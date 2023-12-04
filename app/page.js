@@ -1,41 +1,32 @@
-// "use client";
+"use client";
 
-// // import { Main } from 'next/document'
-// // import Image from 'next/image'
-// // import SearchBox from './components/search-box'
-// import MainPage from './pages/page';
+// import { Main } from 'next/document'
+// import Image from 'next/image'
+// import SearchBox from './components/search-box'
+import MainPage from './pages/page';
 
-// // Testing
+// Testing
 // import { useUserAuth } from "./pages/_utils/auth-context"; // Doesn't go here
+import { AuthContextProvider } from './pages/_utils/auth-context';
 
+export default function Home() {
+  // const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
 
-// export default function Home() {
-//   const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
+  // const handleSignIn = async () => {
+  //   await gitHubSignIn();
+  //   console.log(user)
+  //   console.log('user')
+  // };
 
-//   const handleSignIn = async () => {
-//     await gitHubSignIn();
-//     console.log(user)
-//     console.log('user')
-//   };
+  // const handleSignOut = async () => {
+  //   await firebaseSignOut();
+  // };
 
-//   const handleSignOut = async () => {
-//     await firebaseSignOut();
-//   };
-
-//   return (
-//     <main>
-//       {/* <MainPage /> */}
-//       {!user && (
-//         <button onClick={handleSignIn}>Sign In</button>
-//       )
-//       }
-//       {user && (
-//         <div>
-//           <p>Welcome, {user.displayName} ({user.email})</p>
-//           <button onClick={handleSignOut}>Sign Out</button>
-//           <ShopList />
-//         </div>
-//       )}
-//     </main>
-//   )
-// }
+  return (
+    <main>
+      <AuthContextProvider>
+        <MainPage />
+      </AuthContextProvider>
+    </main>
+  )
+}
