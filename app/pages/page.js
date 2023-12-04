@@ -10,7 +10,8 @@ import NavBar from '../navBar';
 import { useUserAuth } from './_utils/auth-context';
 
 import { createContext } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { savePhoto } from './_services/photo-service'
 
 export const ImageContext = createContext();
 
@@ -21,6 +22,11 @@ export default function Page() {
     const { response, loading, error, fetchData } = FetchPhotos(search);
     const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
 
+    useEffect(() => {
+        console.log('Authenticated user: ', user);
+    }, [user]);
+
+
     const handleSignIn = async () => {
         await gitHubSignIn();
         console.log(user)
@@ -29,6 +35,18 @@ export default function Page() {
 
     const handleSignOut = async () => {
         await firebaseSignOut();
+    };
+
+    const handleSave = async (photo) => {
+        
+        if (user) {
+            console.log('Authenticated user UID:', user.uid);
+            console.log('Authenticated user email:', user.email);
+            console.log('photo to save:', photo)
+            await savePhoto(user, photo);
+        } else {
+            console.log('User not logged in. Cannot save photo.')
+        }
     };
 
     const handleSearch = (searchQuery) => {
@@ -43,6 +61,7 @@ export default function Page() {
     console.log(response);
 
     const value = {
+        user,
         response,
         loading,
         error, 
@@ -53,7 +72,11 @@ export default function Page() {
     return (
         <main>
             {!user && (
-                <button onClick={handleSignIn}>Sign In</button>
+                <div>
+                    <button onClick={handleSignIn}>Sign In</button>
+                    <h1>Log in to save photos</h1>
+                </div>
+                
             )
             }
             {user && (
@@ -63,11 +86,13 @@ export default function Page() {
                 </div>
             )}
             <ImageContext.Provider value={value}>
-                <NavBar />
+                {user && (
+                    <NavBar />
+                )}
                 {/* <SavedPhotos /> */}
                 {/* <Login /> */}
                 <SearchBox onSearch={handleSearch}/>
-                <Images />
+                <Images onSave={handleSave}/>
             </ImageContext.Provider>
         </main>
     )

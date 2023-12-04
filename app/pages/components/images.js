@@ -4,19 +4,23 @@ import { useContext } from "react"
 import { ImageContext } from "../page"
 // import Image from './image'
 
-export default function Images() {
-    const { response, loading, error, fetchData } = useContext(ImageContext);
+export default function Images({ onSave }) {
+    const { user, response, loading, error, fetchData } = useContext(ImageContext);
     
     const handleSave = (photo) => {
-        const savedPhotos = JSON.parse(localStorage.getItem('savedPhotos')) || [];
-        const isPhotoSaved = savedPhotos.some((savedPhoto) => savedPhoto.id === photo.id);
-        
-        if (!isPhotoSaved) {
-            const updatedSavedPhotos = [...savedPhotos, photo];
-            localStorage.setItem('savedPhotos', JSON.stringify(updatedSavedPhotos));
-            alert('Photo saved!');
+        if (user) {
+            const savedPhotos = JSON.parse(localStorage.getItem('savedPhotos')) || [];
+            const isPhotoSaved = savedPhotos.some((savedPhoto) => savedPhoto.id === photo.id);
+            
+            if (!isPhotoSaved) {
+                const updatedSavedPhotos = [...savedPhotos, photo];
+                localStorage.setItem('savedPhotos', JSON.stringify(updatedSavedPhotos));
+                alert('Photo saved!');
+            } else {
+                alert('Photo already saved!');
+            } 
         } else {
-            alert('Photo already saved!');
+            alert('Please login to save photos');
         }
 
     };
@@ -38,8 +42,11 @@ export default function Images() {
                             src={photo.urls.small} 
                             alt={photo.alt_description} 
                             className="w-96 h-96" 
-                            onClick={() => handleSave(photo)}
-                            />
+                            onClick={() => {
+                                handleSave(photo); 
+                                onSave(photo)
+                            }}
+                        />
                         {/* <button 
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                             onClick={() => handleSave(photo)}>Save</button> */}
