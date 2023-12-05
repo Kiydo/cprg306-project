@@ -3,6 +3,7 @@ import { collection, getDocs, addDoc, query, arrayUnion, doc, updateDoc, where, 
 import { getFirestore } from "firebase/firestore";
 
 export const getPhotos = async (user) => {
+    console.log('photos are brewing');
     try {
         const q = query(
             collection(db, 'savedPhotos'),

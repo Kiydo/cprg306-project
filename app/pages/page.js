@@ -11,7 +11,7 @@ import { useUserAuth } from './_utils/auth-context';
 
 import { createContext } from 'react';
 import { useState, useEffect } from 'react';
-import { savePhoto } from './_services/photo-service'
+import { savePhoto, getPhotos } from './_services/photo-service'
 
 export const ImageContext = createContext();
 
@@ -21,9 +21,21 @@ export default function Page() {
     const [search, setSearch] = useState('');
     const { response, loading, error, fetchData } = FetchPhotos(search);
     const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
+    const [savedPhotos, setSavedPhotos] = useState([]);
 
     useEffect(() => {
         console.log('Authenticated user: ', user);
+        if (user) {
+            const fetchSavedPhotos = async () => {
+                try {
+                    const photos = await getPhotos(user);
+                    setSavedPhotos(photos);
+                } catch (error) {
+                    console.log('Error fetching photos: ', error);
+                }
+            };
+            fetchSavedPhotos();
+        }
     }, [user]);
 
 
@@ -44,6 +56,9 @@ export default function Page() {
             console.log('Authenticated user email:', user.email);
             console.log('photo to save:', photo)
             await savePhoto(user, photo);
+
+            const updatedPhotos = await getPhotos(user);
+            setSavedPhotos(updatedPhotos);
         } else {
             console.log('User not logged in. Cannot save photo.')
         }

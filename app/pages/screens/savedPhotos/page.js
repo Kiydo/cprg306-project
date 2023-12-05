@@ -3,15 +3,28 @@
 import React, { useEffect, useState} from "react";
 import NavBar from "../../../navBar";
 import Link from "next/link";
+import { getPhotos } from "../../_services/photo-service"
 
-export default function SavedPhotos() {
+export default function SavedPhotos({ user }) {
     const [savedPhotos, setSavedPhotos] = useState([]);
 
 
+    // useEffect(() => {
+    //     const savedPhotosData = JSON.parse(localStorage.getItem('savedPhotos')) || [];
+    //     setSavedPhotos(savedPhotosData);
+    // }, []);
     useEffect(() => {
-        const savedPhotosData = JSON.parse(localStorage.getItem('savedPhotos')) || [];
-        setSavedPhotos(savedPhotosData);
-    }, []);
+        console.log('loading photo useEffect works-ish');
+        if (user) {
+          const fetchSavedPhotos = async () => {
+            const photos = await getSavedPhotos(user);
+            setSavedPhotos(photos);
+            console.log('inside useEffect for loading photo')
+          };
+          console.log('something went wrong when loading photo')
+          fetchSavedPhotos();
+        }
+    }, [user]);
 
     const handleDelete = (photoId) => {
         const updatedSavedPhotos = savedPhotos.filter((photo) => photo.id !== photoId);
@@ -31,7 +44,7 @@ export default function SavedPhotos() {
                 ))}
             </ul>
 
-            <Link href="../page.js">Home</Link>
+            {/* <Link href="../page.js">Home</Link> */}
         </main>
         
     )
