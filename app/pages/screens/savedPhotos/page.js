@@ -8,6 +8,7 @@ import { getPhotos } from "../../_services/photo-service"
 export default function SavedPhotos({ user }) {
     const [savedPhotos, setSavedPhotos] = useState([]);
 
+    // test
 
     // useEffect(() => {
     //     const savedPhotosData = JSON.parse(localStorage.getItem('savedPhotos')) || [];
@@ -26,6 +27,7 @@ export default function SavedPhotos({ user }) {
         }
     }, [user]);
 
+    
     const handleDelete = (photoId) => {
         const updatedSavedPhotos = savedPhotos.filter((photo) => photo.id !== photoId);
         localStorage.setItem('savedPhotos', JSON.stringify(updatedSavedPhotos));
