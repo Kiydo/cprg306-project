@@ -49,18 +49,21 @@ export default function SavedPhotos() {
             <h2>Saved Photos</h2>
             <ul className="grid grid-cols-5 gap-3">
                 {savedPhotos.map((userData) => {
-                    const photos = userData.photos || []; // Access the photos array from userData, default to an empty array if undefined
+                    const photos = userData.photos || [];
 
-                    return photos.map((photo) => (
-                        <li key={photo.id}>
-                            <img
-                                src={photo.urls?.small} // Use optional chaining to avoid errors if urls is undefined
-                                alt={photo.alt_description}
-                                className="w-96 h-96"
-                                onClick={() => handleDelete(photo.id)}
-                            />
-                        </li>
-                    ));
+                    return photos.map((photo) => {
+                        console.log('Processing photo:', photo);
+                        return (
+                            <li key={photo.id}>
+                                <img
+                                    src={photo.urls?.small}
+                                    alt={photo.alt_description}
+                                    className="w-96 h-96"
+                                    onClick={() => handleDelete(photo.id)}
+                                />
+                            </li>
+                        );
+                    });
                 })}
             </ul>
 
