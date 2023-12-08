@@ -8,9 +8,9 @@ export default function NavBar() {
         <main className="p-1">
             <nav>
                 {!user && (
-                    <div className="flex">
-                        <h1>Log in to save photos</h1>
-                        <ul>
+                    <div>
+                        
+                        <ul className="flex">
                             <li>
                                 <Link href="/pages" className="mr-8 ml-4 hover:text-sky-700">
                                     Home
@@ -26,7 +26,9 @@ export default function NavBar() {
                                     Sign Up
                                 </Link>
                             </li>
+                           
                         </ul>
+                        {/* <h1>Log in to save photos</h1> */}
                     </div>
                 )}
                 {user && (

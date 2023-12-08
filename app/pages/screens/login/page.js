@@ -19,14 +19,25 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="min-h-screen">
         <NavBar />
-      <h1>Login</h1>
-      <label>Email:</label>
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <label>Password:</label>
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <button onClick={handleLogin}>Login</button>
+        <div className=" flex  justify-center">
+            {/* <h1 >Login</h1> */}
+            <div className='flex flex-col p-12'>
+                <h1 className='font-bold pb-4 text-lg' >Login</h1>
+                <label>Email:</label>
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <label className='mt-4'>Password:</label>
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <button
+                    className='mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' 
+                    onClick={handleLogin}
+                    >
+                    Login
+                </button>
+            </div>
+            {/* <button onClick={handleLogin}>Login</button> */}
+        </div>
     </div>
   );
 };

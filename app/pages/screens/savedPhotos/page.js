@@ -4,9 +4,11 @@ import React, { useEffect, useState} from "react";
 import NavBar from "../../../navBar";
 import Link from "next/link";
 import { getPhotos } from "../../_services/photo-service"
+import { useUserAuth } from '../../_utils/auth-context';
 
-export default function SavedPhotos({ user }) {
+export default function SavedPhotos() {
     const [savedPhotos, setSavedPhotos] = useState([]);
+    const { user, emailSignUp, emailSignIn, firebaseSignOut } = useUserAuth();
 
     // test
 
@@ -16,11 +18,18 @@ export default function SavedPhotos({ user }) {
     // }, []);
     useEffect(() => {
         console.log('loading photo useEffect works-ish');
-        if (user) {
+        console.log('Athenticated user: ', user)
+        // console.log('user id: ', user.uid)
+        if (user && user.uid) {
+            console.log('User ID: ', user.uid)
           const fetchSavedPhotos = async () => {
-            const photos = await getSavedPhotos(user);
-            setSavedPhotos(photos);
-            console.log('inside useEffect for loading photo')
+            try {
+                const photos = await getPhotos(user);
+                setSavedPhotos(photos);
+                console.log('Fetched photos:', photos);
+              } catch (error) {
+                console.log('Error fetching photos: ', error);
+              }
           };
           console.log('something went wrong when loading photo')
           fetchSavedPhotos();
