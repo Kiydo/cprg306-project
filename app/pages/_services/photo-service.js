@@ -38,7 +38,7 @@ export const getPhotos = async (user) => {
 export const savePhoto = async (user, photo) => {
     try {
         const userRef = doc(db, 'savedPhotos', user.uid);
-        await setDoc(userRef, { photos: arrayUnion(photo) }, { merge: true });
+        await setDoc(userRef, { userId: user.uid, photos: arrayUnion(photo) }, { merge: true });
         console.log('Photo saved successfully!');
     } catch (error) {
         console.error('Error saving photo:', error);
