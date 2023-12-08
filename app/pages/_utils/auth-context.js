@@ -6,6 +6,8 @@ import {
   signOut,
   onAuthStateChanged,
   GithubAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "./firebase";
  
@@ -14,6 +16,26 @@ const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
  
+  // Email Sign up
+  const emailSignUp = async (email, password) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      setUser(userCredential.user);
+    } catch (error) {
+      console.error('Error signing up:', error.message);
+    }
+  };
+  // Email Sign in
+  const emailSignIn = async (email, password) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      setUser(userCredential.user);
+    } catch (error) {
+      console.error('Error signing in:', error.message);
+    }
+  };
+
+  // Github Sign In
   const gitHubSignIn = () => {
     const provider = new GithubAuthProvider();
     return signInWithPopup(auth, provider);
@@ -31,7 +53,8 @@ export const AuthContextProvider = ({ children }) => {
   }, [user]);
  
   return (
-    <AuthContext.Provider value={{ user, gitHubSignIn, firebaseSignOut }}>
+    // <AuthContext.Provider value={{ user, gitHubSignIn, emailSignUp, emailSignIn, firebaseSignOut }}>
+    <AuthContext.Provider value={{ user, emailSignUp, emailSignIn, firebaseSignOut }}>
       {children}
     </AuthContext.Provider>
   );

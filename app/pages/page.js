@@ -20,7 +20,8 @@ export default function Page() {
     // const { response, loading, error, fetchData } = FetchPhotos(`https://api.unsplash.com/search/collections?page=1&query=schools`);
     const [search, setSearch] = useState('');
     const { response, loading, error, fetchData } = FetchPhotos(search);
-    const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
+    // const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
+    const { user, emailSignUp, emailSignIn, firebaseSignOut } = useUserAuth();
     const [savedPhotos, setSavedPhotos] = useState([]);
 
     useEffect(() => {
@@ -38,9 +39,13 @@ export default function Page() {
         }
     }, [user]);
 
+    const handleSignUp = async (email, password) => {
+        await emailSignUp(email, password);
+    };
 
-    const handleSignIn = async () => {
-        await gitHubSignIn();
+    const handleSignIn = async (email, password) => {
+        // await gitHubSignIn();
+        await emailSignIn(email, password);
         console.log(user)
         console.log('user')
     };
@@ -87,13 +92,21 @@ export default function Page() {
     return (
         <main>
             {!user && (
-                <div>
-                    <button onClick={handleSignIn}>Sign In</button>
-                    <h1>Log in to save photos</h1>
-                </div>
-                
-            )
-            }
+                // <div>
+                //     <div>
+                //     <button onClick={() => handleSignUp('user@example.com', 'password')}>Sign Up</button>
+                //     </div>
+                //     <div>
+                //     <button onClick={() => handleSignIn('user@example.com', 'password')}>Sign In</button>
+                //         <h1>Log in to save photos</h1>
+                //     </div>
+                // </div>
+                // <div>
+                //     <h1>Log in to save photos</h1>
+                    
+                // </div>
+                <NavBar />
+            )}
             {user && (
                 <div>
                     <p>Welcome, {user.displayName} ({user.email})</p>
