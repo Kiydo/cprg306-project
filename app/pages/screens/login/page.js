@@ -19,10 +19,9 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div>
         <NavBar />
-        <div className=" flex  justify-center">
-            {/* <h1 >Login</h1> */}
+        <div className=" flex  justify-center bg-slate-200 min-h-screen">
             <div className='flex flex-col p-12'>
                 <h1 className='font-bold pb-4 text-lg' >Login</h1>
                 <label>Email:</label>
@@ -36,7 +35,6 @@ const Login = () => {
                     Login
                 </button>
             </div>
-            {/* <button onClick={handleLogin}>Login</button> */}
         </div>
     </div>
   );

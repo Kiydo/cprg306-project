@@ -4,15 +4,20 @@ import { useUserAuth } from './pages/_utils/auth-context';
 export default function NavBar() {
     const { user, emailSignUp, emailSignIn, firebaseSignOut } = useUserAuth();
 
+    const handleSignOut = async () => {
+        await firebaseSignOut();
+    };
+
+
     return (
-        <main className="p-1">
+        <main className="p-2 bg-blue-300 font-bold">
             <nav>
                 {!user && (
                     <div>
                         
                         <ul className="flex">
                             <li>
-                                <Link href="/pages" className="mr-8 ml-4 hover:text-sky-700">
+                                <Link href="/pages" className="mr-8 ml-8 hover:text-sky-700">
                                     Home
                                 </Link>
                             </li>
@@ -41,6 +46,16 @@ export default function NavBar() {
                         <li>
                             <Link href="/pages/screens/savedPhotos" className="mr-8 ml-4 hover:text-sky-700">
                                 Saved
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/pages">
+                                <button 
+                                    onClick={handleSignOut}
+                                    className="mr-8 ml-4 hover:text-sky-700"
+                                >
+                                    Sign Out
+                                </button>
                             </Link>
                         </li>
                     </ul>

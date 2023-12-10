@@ -39,16 +39,16 @@ export default function Page() {
         }
     }, [user]);
 
-    const handleSignUp = async (email, password) => {
-        await emailSignUp(email, password);
-    };
+    // const handleSignUp = async (email, password) => {
+    //     await emailSignUp(email, password);
+    // };
 
-    const handleSignIn = async (email, password) => {
-        // await gitHubSignIn();
-        await emailSignIn(email, password);
-        console.log(user)
-        console.log('user')
-    };
+    // const handleSignIn = async (email, password) => {
+    //     // await gitHubSignIn();
+    //     await emailSignIn(email, password);
+    //     console.log(user)
+    //     console.log('user')
+    // };
 
     const handleSignOut = async () => {
         await firebaseSignOut();
@@ -57,9 +57,9 @@ export default function Page() {
     const handleSave = async (photo) => {
         
         if (user) {
-            console.log('Authenticated user UID:', user.uid);
-            console.log('Authenticated user email:', user.email);
-            console.log('photo to save:', photo)
+            // console.log('Authenticated user UID:', user.uid);
+            // console.log('Authenticated user email:', user.email);
+            // console.log('photo to save:', photo)
             await savePhoto(user, photo);
 
             const updatedPhotos = await getPhotos(user);
@@ -92,27 +92,10 @@ export default function Page() {
     return (
         <main>
             {!user && (
-                // <div>
-                //     <div>
-                //     <button onClick={() => handleSignUp('user@example.com', 'password')}>Sign Up</button>
-                //     </div>
-                //     <div>
-                //     <button onClick={() => handleSignIn('user@example.com', 'password')}>Sign In</button>
-                //         <h1>Log in to save photos</h1>
-                //     </div>
-                // </div>
-                // <div>
-                //     <h1>Log in to save photos</h1>
-                    
-                // </div>
+                
                 <NavBar />
             )}
-            {user && (
-                <div>
-                    <p>Welcome, {user.displayName} ({user.email})</p>
-                    <button onClick={handleSignOut}>Sign Out</button>
-                </div>
-            )}
+           
             <ImageContext.Provider value={value}>
                 {user && (
                     <NavBar />

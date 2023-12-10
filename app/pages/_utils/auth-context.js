@@ -21,8 +21,10 @@ export const AuthContextProvider = ({ children }) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       setUser(userCredential.user);
+      alert('Sign up successful!');
     } catch (error) {
       console.error('Error signing up:', error.message);
+      alert('Error Signing up');
     }
   };
   // Email Sign in
@@ -30,8 +32,10 @@ export const AuthContextProvider = ({ children }) => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       setUser(userCredential.user);
+      alert('Sign in successful!');
     } catch (error) {
       console.error('Error signing in:', error.message);
+      alert('Error signing in');
     }
   };
 

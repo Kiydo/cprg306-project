@@ -26,30 +26,20 @@ export default function Images({ onSave }) {
     };
     
     return (
-        <div className="h-screen">
+        <div className="min-h-screen bg-slate-200">
             {/* {response.map((data, key) => <Image key={key} data={data} /> )} */}
             <ul className="grid grid-cols-5 gap-3">
                 {response.map((photo) => (
-                    // <li key={photo.id}>
-                    //     {console.log('Test')} {console.log(photo)}
-                    //     {/* Check if 'cover_photo.urls.small' exists before rendering */}
-                    //     {photo.cover_photo && photo.cover_photo.urls && photo.cover_photo.urls.small && (
-                    //             <img src={photo.cover_photo.urls.small} alt={photo.title} />
-                    //         )}
-                    // </li>
                     <li key={photo.id} >
                         <img 
                             src={photo.urls.small} 
                             alt={photo.alt_description} 
-                            className="w-96 h-96" 
+                            className="w-full h-96 object-cover" 
                             onClick={() => {
                                 handleSave(photo); 
                                 onSave(photo)
                             }}
                         />
-                        {/* <button 
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                            onClick={() => handleSave(photo)}>Save</button> */}
                     </li>
                     
                 ))}
