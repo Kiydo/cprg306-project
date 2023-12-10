@@ -5,11 +5,12 @@ import { useState } from 'react';
 import { useUserAuth } from '../../_utils/auth-context';
 import NavBar from '../../../navBar';
 
+
 const Login = () => {
-  const { emailSignIn } = useUserAuth();
+  const { user, emailSignIn } = useUserAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  
   const handleLogin = async () => {
     try {
         await emailSignIn(email, password);
@@ -21,6 +22,12 @@ const Login = () => {
   return (
     <div>
         <NavBar />
+        <div className='bg-slate-200'>
+              {user && (
+                    <h1>Current Account: {user.email} </h1>
+
+              )}
+        </div>
         <div className=" flex  justify-center bg-slate-200 min-h-screen">
             <div className='flex flex-col p-12'>
                 <h1 className='font-bold pb-4 text-lg' >Login</h1>
@@ -35,6 +42,7 @@ const Login = () => {
                     Login
                 </button>
             </div>
+            
         </div>
     </div>
   );

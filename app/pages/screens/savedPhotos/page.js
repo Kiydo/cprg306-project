@@ -54,8 +54,14 @@ export default function SavedPhotos() {
     };
 
     return (
-        <main className="min-h-screen">
+        <main className="min-h-screen bg-slate-200">
             <NavBar />
+            <div className='bg-slate-200'>
+                {user && (
+                    <h1>Current Account: {user.email} </h1>
+
+                )}
+            </div>
             <div className="grid place-items-center bg-slate-200 p-16">
                 <h2 className="text-4xl p-2 font-bold ">Saved Photos</h2>
             </div>
